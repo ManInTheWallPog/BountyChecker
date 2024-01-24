@@ -22,5 +22,8 @@ It sends some Game Data, thats all. No IP Adress or Username or anything:
 ```/Lotus/Types/Gameplay/Eidolon/Jobs/ReclamationBountyCap_-4_CetusHub4_65b1683b0000000000000008_TentB```
 ```['/Lotus/Types/Gameplay/Eidolon/Encounters/DynamicRescue', '/Lotus/Types/Gameplay/Eidolon/Encounters/DynamicAssassinate', '/Lotus/Types/Gameplay/Eidolon/Encounters/HiddenResourceCaches', '/Lotus/Types/Gameplay/Eidolon/Encounters/DynamicHijack', '/Lotus/Types/Gameplay/Eidolon/Encounters/DynamicCapture']```
 
+# How to get the .py working?
+Install Python 3.11 (this is what is has been tested on, may work on lower versions too). Then do `/py -m pip install requirements.txt` in the folder.
+
 # Will this get updates?
 Yes
