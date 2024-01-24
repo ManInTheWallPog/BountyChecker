@@ -215,6 +215,15 @@ class OverlayApp:
                     self.logger.info("Good Bounty")
                     tts.say("Good Bounty")
                     tts.runAndWait()
+                    #The following lines are what the Webhook is sending in case you wonder. Leave this commented out
+                    """try: 
+                        if json_data['job'] == "ReclamationBountyCap" or json_data['job'] == "ReclamationBountyCache":
+                            if json_data["jobTier"] == 4:
+                                text = f"```{json_data['jobLevelGenerationSeed']}{json_data['job']}\n{json_data['name']}\n{json_data['jobReward']} \n{json_data['jobId']}\n{json_data['jobStages']}```"
+                                webhook = DiscordWebhook(url=desti, content=text)
+                                webhook.execute()
+                    except:
+                        pass"""
                     return True
 
             except Exception as e:
