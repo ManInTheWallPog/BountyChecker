@@ -27,3 +27,6 @@ Install Python 3.11 (this is what is has been tested on, may work on lower versi
 
 # Will this get updates?
 Yes
+
+# MacOS?
+If you, for whatever godsaken reason play Warframe on MacOS, [RaajYedida made a port of this for MacOS](https://github.com/RaajYedida/WFBountyCheckerMacOS)
