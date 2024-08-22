@@ -7,6 +7,7 @@ import json
 import threading
 import requests
 import json
+from tkinter import ttk
 
 
 def setup_custom_logger(name):
@@ -37,7 +38,7 @@ class OverlayApp:
         self.label = tk.Label(self.root, text="Drag me around", fg="white", bg="black",
                               font=('Times New Roman', 15, ''))
         self.label.pack(fill="both", expand=True)
-       
+        self.stageselection = False
         self.label.bind("<Button-1>", self.start_drag)
         self.label.bind("<ButtonRelease-1>", self.stop_drag)
         self.label.bind("<B1-Motion>", self.on_drag)
@@ -80,17 +81,46 @@ class OverlayApp:
         width = self.label.winfo_reqwidth() + 2  # Add some padding
         self.root.geometry(f"{width}x40")
 
+    def show_popup(self):
+        popup = tk.Toplevel()
+        popup.title("Bounty Tasks")
+        popup.attributes("-topmost", True)
+        popup.focus_force()
+        frame = ttk.Frame(popup, padding="10")
+        frame.grid(row=0, column=0, sticky=(tk.W, tk.E))
+        var_dict = {}
+        for idx, (key, value) in enumerate(self.bounty_translation.items()):
+            var_dict[key] = tk.BooleanVar(value=(key in self.wanted_bounties))
+            cb = ttk.Checkbutton(frame, text=value, variable=var_dict[key])
+            cb.grid(row=idx, column=0, sticky=tk.W)
+        def save_and_close():
+            self.wanted_bounties = [key for key, var in var_dict.items() if var.get()]
+           
+            popup.destroy()
+        save_button = ttk.Button(frame, text="Save and Close", command=save_and_close)
+        save_button.grid(row=len(self.bounty_translation), column=0, pady=10)
+        popup.transient(self.root)
+        popup.grab_set()
+        self.root.wait_window(popup)
     def run(self):
         overlayselection = False
-        while overlayselection == False:
-            overlay_enabled = input("Do you want to enable Overlay? (Y/N):")
-            overlay_enabled = overlay_enabled.replace("Yes", "Y").replace("No", "N").replace("y", "Y").replace("n", "N")
-            if overlay_enabled == "Y":
+        while not overlayselection:
+            overlay_enabled = input("Do you want to enable Overlay? (Y/N):").strip().lower()
+            if overlay_enabled == "y":
                 overlayselection = True
-            elif overlay_enabled == "N":
+            elif overlay_enabled == "n":
                 overlayselection = True
                 self.enable_overlay = False
                 self.root.attributes("-alpha", 0.0)
+
+        while not self.stageselection:
+            stageselection_enabled = input("Do you want to select your stages manually? (Y/N):").strip().lower()
+            if stageselection_enabled == "y":
+                self.stageselection = True
+                self.show_popup()
+            elif stageselection_enabled == "n":
+                self.stageselection = True
+        print("Selected bounties:", self.wanted_bounties)
         threading.Thread(target=self.data_parser).start()
         self.update_overlay("starting", "white")
         self.root.mainloop()
@@ -215,15 +245,6 @@ class OverlayApp:
                     self.logger.info("Good Bounty")
                     tts.say("Good Bounty")
                     tts.runAndWait()
-                    #The following lines are what the Webhook is sending in case you wonder. Leave this commented out
-                    """try: 
-                        if json_data['job'] == "ReclamationBountyCap" or json_data['job'] == "ReclamationBountyCache":
-                            if json_data["jobTier"] == 4:
-                                text = f"```{json_data['jobLevelGenerationSeed']}{json_data['job']}\n{json_data['name']}\n{json_data['jobReward']} \n{json_data['jobId']}\n{json_data['jobStages']}```"
-                                webhook = DiscordWebhook(url=desti, content=text)
-                                webhook.execute()
-                    except:
-                        pass"""
                     return True
 
             except Exception as e:
