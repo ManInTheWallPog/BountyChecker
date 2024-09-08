@@ -12,7 +12,15 @@ Long Answer is: The Scripts parse EE.log, the logfile where Warframe logs all so
 Unfortunately, this is how it currently is. The source code is freely avaible here though and you can choose to check it and modify it as you please.
 
 # Why are there two versions?
-One version sends good bounties to us through a Discord Webhook. That way everyone can benefit from good bounties. The other version does not - choose whichever you like (though ofc we hope for people actively sharing their bounties). 
+One version (with_share) sends good bounties to us. That way everyone can benefit from good bounties. The other version does not - choose whichever you like (though ofc we hope for people actively sharing their bounties). 
+
+#What does "with_share" / "no_share" mean?
+As mentioned above, there are two versions of the program. One named "with_share", one named "no_share". 
+The functionality of both versions is the exact same for your end. You yourself will have no advantages or disadvantages running either version.
+**SHARE**
+This version will send us information about a good bounty (see below chapter on what it sends). That way, other people can see whenever a good bounty is up that is not the base quest. Basically you are "sharing" your rolls with everyone.
+**NO_SHARE**
+This version does not send anything to us. That way, you can still run the bounty but others may not be aware of a good bounty being up.
 
 # What does it send?
 It sends some Game Data, thats all. No IP Adress or Username or anything:
