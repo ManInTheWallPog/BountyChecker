@@ -14,7 +14,7 @@ Unfortunately, this is how it currently is. The source code is freely avaible he
 # Why are there two versions?
 One version (with_share) sends good bounties to us. That way everyone can benefit from good bounties. The other version does not - choose whichever you like (though ofc we hope for people actively sharing their bounties). 
 
-#What does "with_share" / "no_share" mean?
+# What does "with_share" / "no_share" mean?
 As mentioned above, there are two versions of the program. One named "with_share", one named "no_share". 
 The functionality of both versions is the exact same for your end. You yourself will have no advantages or disadvantages running either version.
 **SHARE**
